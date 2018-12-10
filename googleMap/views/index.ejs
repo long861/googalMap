@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="/logo.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>test</title>
+    <style>
+        #container {width:300px; height: 180px; }  
+    </style>
+</head>
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.11&key=7a216eb6c880ca83422d110ffe667d60"></script>
+
+<body>
+    <div class="mapBox">
+        <div id="container"></div>
+    </div>
+</body>
+<script>
+    // 构造地图对象的方法一：使用地图容器ID创建
+    // var map = new AMap.Map('container');
+    // 构造地图对象的方法二：使用地图容器对象创建
+    // var map = new AMap.Map(document.getElementById("container"));
+    var map = new AMap.Map('container', {
+        zoom: 10,  //设置地图显示的缩放级别
+        center: [113.666509,34.752185],//设置地图中心点坐标
+        layers: [new AMap.TileLayer.Satellite()],  //设置图层,可设置成包含一个或多个图层的数组
+        mapStyle: 'amap://styles/whitesmoke',  //设置地图的显示样式 //whitesmoke为实景地图 normal为标准地图
+        viewMode: '2D',  //设置地图模式
+        lang: 'zh_cn',  //设置地图语言类型
+    });
+</script>
+
+</html>

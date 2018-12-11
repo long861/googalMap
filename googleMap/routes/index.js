@@ -15,4 +15,7 @@ router.get('/choiceCity', function(req, res, next) {
 router.get('/searce', function(req, res, next) {
   res.render('searce', { title: '定点' });
 });
+router.get('/pull', function(req, res, next) {
+  res.render('pull', { title: '拖拽选址' });
+});
 module.exports = router;

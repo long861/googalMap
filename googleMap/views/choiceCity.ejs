@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>choiceCity</title>
+    <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+<script src="//webapi.amap.com/maps?v=1.3&key=7a216eb6c880ca83422d110ffe667d60"></script>
+<!-- <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.11&key=7a216eb6c880ca83422d110ffe667d60"></script> -->
+<script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+<link type="text/css" rel="stylesheet" href="https://webapi.amap.com/ui/1.0/ui/misc/MobiCityPicker/examples/red-theme.css?v=1.0.11">
+    <style>
+        #choiceCity {width:600px; height: 300px; margin:100px auto;}  
+    </style>
+</head>
+
+
+<body>
+    <div>
+        <div id="choiceCity"></div>
+    </div>
+</body>
+<script>
+
+    //AMapUI.setDomLibrary(Zepto);
+
+    AMapUI.loadUI(['misc/MobiCityPicker'], function (MobiCityPicker) {
+
+        //动态加载自定义的红色主题， 如果css已经写在当前页面中，可忽略此步骤
+        AMapUI.loadCss('./red-theme.css', function () {
+
+            var cityPicker = new MobiCityPicker({
+                //设置主题（同名的className会被添加到外层容器上）
+                theme: 'red'
+            });
+
+            cityPickerReady(cityPicker);
+
+            cityPicker.show();
+        });
+    });
+
+</script>
+
+</html>

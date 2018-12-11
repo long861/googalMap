@@ -6,9 +6,10 @@
     <link rel="shortcut icon" href="/logo.ico" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <title>test</title>
     <style>
-        #container {width:300px; height: 180px; }  
+        #container {width:600px; height: 300px; margin:100px auto;}  
     </style>
 </head>
 <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.11&key=7a216eb6c880ca83422d110ffe667d60"></script>
@@ -16,6 +17,8 @@
 <body>
     <div class="mapBox">
         <div id="container"></div>
+        <h1><a href="/choiceCity">手机版城市选择</a></h1>
+        <h1><a href="/searce">定点查询</a></h1>
     </div>
 </body>
 <script>
@@ -25,12 +28,77 @@
     // var map = new AMap.Map(document.getElementById("container"));
     var map = new AMap.Map('container', {
         zoom: 10,  //设置地图显示的缩放级别
-        center: [113.666509,34.752185],//设置地图中心点坐标
-        layers: [new AMap.TileLayer.Satellite()],  //设置图层,可设置成包含一个或多个图层的数组
+        center: [113.666509, 34.752185],//设置地图中心点坐标
+        // layers: [new AMap.TileLayer.Satellite()],  //设置图层,可设置成包含一个或多个图层的数组
         mapStyle: 'amap://styles/whitesmoke',  //设置地图的显示样式 //whitesmoke为实景地图 normal为标准地图
-        viewMode: '2D',  //设置地图模式
+        // viewMode: '2D',  //设置地图模式
         lang: 'zh_cn',  //设置地图语言类型
     });
+
+    // // 传入经纬度，设置地图中心点 //宣武门坐标
+    // var position = new AMap.LngLat(116.374314, 39.899765);  // 标准写法
+    // // 简写 var position = [116, 39]; 
+    // map.setCenter(position);
+    // // 获取地图中心点
+    // var currentCenter = map.getCenter();
+    // console.log('====currentCenter', currentCenter);
+
+    // // 设置地图级别，级别为数字。
+    // // PC上，参数zoom可设范围：[3,18]；
+    // // 移动端：参数zoom可设范围：[3,19]
+    // map.setZoom(14);
+    // // 获取地图级别
+    // var currentZoom = map.getZoom(); 
+    // console.log('====currentZoom',currentZoom)
+
+    // 同时传入缩放级别和中心点经纬度
+    // map.setZoomAndCenter(15, [116.374314, 39.899765]);
+
+    // var map = new AMap.Map("container", {
+    //     resizeEnable: true,
+    //     zoom: 12,
+    //     center: [116.397428, 39.90923]
+    // })
+    // //东北
+    // var m = new AMap.Marker({
+    //     position: [121.851547, 52.762852],
+    //     map: map
+    // });
+    // //海南
+    // var m2 = new AMap.Marker({
+    //     position: [109.439743, 18.529034],
+    //     map: map
+    // })
+    // //希望自适应展示的部分的点
+    // var markers = [], positions = [[116.405467, 39.907761], [116.415467, 39.907761], [116.415467, 39.917761], [116.425467, 39.907761], [116.385467, 39.907761]];
+    // for (var i = 0, marker; i < positions.length; i++) {
+    //     marker = new AMap.Marker({
+    //         map: map,
+    //         icon: 'http://webapi.amap.com/theme/v1.3/markers/n/mark_b' + (i + 1) + '.png',
+    //         position: positions[i]
+    //     });
+    //     markers.push(marker);
+    // }
+    // map.setFitView();//如果直接这样写，默认是把东北和海南的点都展示出来，
+    // //但是希望只自适应的展示markers里的5个点
+    // map.setFitView(markers);
+
+    // //1.把想自适应的部分的点装在一个透明的覆盖物图层里
+    // var polygon = new AMap.Polygon({
+    //     path: positions,  //以5个点的坐标创建一个隐藏的多边形
+    //     map: map,
+    //     strokeOpacity: 1,//不透明
+    //     fillOpacity: 0,//透明
+    //     bubble: true//事件穿透到地图
+    // });
+    // var overlaysList = map.getAllOverlays('polygon');//获取多边形图层
+
+    // //2.使用setFitView方法
+    // map.setFitView(overlaysList);//自适应显示
+
+    
+
+
 </script>
 
 </html>

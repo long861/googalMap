@@ -6,12 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>choiceCity</title>
-    <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
-    <script src="//webapi.amap.com/maps?v=1.3&key=7a216eb6c880ca83422d110ffe667d60"></script>
-    <!-- <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.11&key=7a216eb6c880ca83422d110ffe667d60"></script> -->
-    <script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+    <!-- 引入主题颜色，也可在css样式表中自行设置 -->
     <link type="text/css" rel="stylesheet" href="https://webapi.amap.com/ui/1.0/ui/misc/MobiCityPicker/examples/red-theme.css?v=1.0.11">
+    <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+    <!-- 引入谷歌地图api -->
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.11&key=7a216eb6c880ca83422d110ffe667d60"></script>
+    <!-- 引入ui组件库 -->
+    <script src="//webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
     <style>
+        body {
+            height: 100%;
+        }
+
         #choiceCity {
             width: 600px;
             height: 300px;
@@ -20,32 +26,47 @@
     </style>
 </head>
 
-
 <body>
     <div>
         <div id="choiceCity"></div>
     </div>
 </body>
+
 <script>
+    // 如果需要使用UI组件库引用的DomLibrary，可以用如下方法引入：
+    // AMapUI.load(['lib/$'], function ($) {
 
-    //AMapUI.setDomLibrary(Zepto);
-
+    // })
+    // $ 即为UI组件库最终使用的DomLibrary
+    // UI组件库会在需要时动态加载相关的DomLibrary资源（PC环境下是jQuery，手机环境下是Zepto）
+    // 本人在PC端测试并使用，所以加载了jquery
+    // AMapUI.setDomLibrary(Zepto);
+    AMapUI.setDomLibrary(jQuery);
     AMapUI.loadUI(['misc/MobiCityPicker'], function (MobiCityPicker) {
-
+        var map = new AMap.Map('choiceCity');
+        // map.setFitView();
         //动态加载自定义的红色主题， 如果css已经写在当前页面中，可忽略此步骤
+        var cityPicker = new MobiCityPicker({
+            //设置主题（同名的className会被添加到外层容器上）
+            theme: 'red'
+        });
         AMapUI.loadCss('./red-theme.css', function () {
-
-            var cityPicker = new MobiCityPicker({
-                //设置主题（同名的className会被添加到外层容器上）
-                theme: 'red'
-            });
-
-            cityPickerReady(cityPicker);
-
+            // cityPickerReady(cityPicker);
             cityPicker.show();
         });
+        //监听城市选中事件
+        cityPicker.on('citySelected', function (cityInfo) {
+            //隐藏城市列表
+            // cityPicker.hide();
+            //选中的城市信息
+            // 输出选中城市信息
+            console.log(cityInfo);
+            // 以选中的当前城市为中心并zoom为15；
+            //当前地点可能并非所在城市的固定区域，考虑是否通过地点查询经纬度
+            map.setZoomAndCenter(15, [cityInfo.lng, cityInfo.lat])
+            var currentCenter = map.getCenter();
+        });
     });
-
 </script>
 
 </html>
